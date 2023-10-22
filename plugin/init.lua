@@ -426,7 +426,7 @@ wezterm.on("update-status", function(window, pane)
       { Attribute = { Intensity = "Bold" } },
       { Background = { Color = "#f5e0dc" } },
       { Foreground = { Color = palette.background } },
-      { Text = " "..activepane:get_foreground_process_name().." " }
+      { Text = " "..pane:get_current_working_dir()" " }
     }) 
   end
 
