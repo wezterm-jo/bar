@@ -34,10 +34,9 @@ local config = {
     enabled = true,
     format = "%H:%M",
   },
-  custom = {
-    enabled = true,
-    text = "Custom"
-  }
+  workspace = {
+    enabled = true
+  },
 }
 
 -- parsed config
@@ -122,9 +121,8 @@ M.apply_to_config = function(c, opts)
     format = config.clock.format,
   }
 
-  C.custom = {
-    enabled = config.custom.enabled,
-    text = config.custom.text
+  C.workspace = {
+    enabled = config.workspace.enabled,
   }
 
   -- set the right-hand padding to 0 spaces, if the rounded style is active
@@ -203,7 +201,7 @@ local function startsWith(str, prefix)
     return string.sub(str, 1, #prefix) == prefix
 end
 
--- custom tab bar
+-- workspace tab bar
 wezterm.on(
   "format-tab-title",
   function(tab, tabs, _panes, conf, _hover, _max_width)
@@ -310,7 +308,7 @@ wezterm.on(
         tabtitle = nerd_icons['vim']
     elseif startsWith(tabtitle, "~") then
         tabtitle = nerd_icons['terminal']
-    elseif startsWith(tabtitle, "wslcustom.exe") then
+    elseif startsWith(tabtitle, "wslworkspace.exe") then
         tabtitle = nerd_icons['terminal']
     end
 
@@ -383,8 +381,8 @@ wezterm.on("update-status", function(window, _pane)
   window:set_left_status(leader .. mode .. divider)
 
   local right_status = ""
-  if C.custom.enabled  then
-    right_status = C.custom.text
+  if C.workspace.enabled  then
+    right_status = wezterm.mux.get_active_workspace()
   end
 
   if C.clock.enabled then
