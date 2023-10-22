@@ -432,9 +432,9 @@ wezterm.on("update-status", function(window, pane)
     text = workspace_status
   end
 
-  -- if dir_status ~= "" then
-  --   text = text..dir_status
-  -- end
+  if dir_status ~= "" then
+    text = text..dir_status
+  end
 
   if text ~= "" then
     window:set_right_status(text)
