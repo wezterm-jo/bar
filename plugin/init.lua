@@ -394,7 +394,7 @@ wezterm.on("update-status", function(window, pane)
   local workspace_status = ""
   local dir_status = ""
   local text = ""
-  local divider2 = wezterm.format({
+  local divider1 = wezterm.format({
     { Background = { Color = "#11111b" } },
     { Foreground = { Color = "#eba0ac" } },
     { Text = C.div.l },
@@ -408,7 +408,7 @@ wezterm.on("update-status", function(window, pane)
     })
   end
 
-  local divider1 = wezterm.format({
+  local divider2 = wezterm.format({
     { Background = { Color = "#eba0ac" } },
     { Foreground = { Color = "#f5e0dc" } },
     { Text = C.div.l },
