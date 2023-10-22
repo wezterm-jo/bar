@@ -387,7 +387,7 @@ wezterm.on("update-status", function(window, _pane)
     workspace_status = wezterm.format({
       { Background = { Color = "#cba6f7" } },
       { Foreground = { Color = palette.background } },
-      { Text = wezterm.mux.get_active_workspace() }
+      { Text = " "..wezterm.mux.get_active_workspace().." " }
     })
   end
 
@@ -396,7 +396,7 @@ wezterm.on("update-status", function(window, _pane)
     clock_status = wezterm.format({
       { Background = { Color = "#fab387" } },
       { Foreground = { Color = palette.background } },
-      { Text = time }
+      { Text = " "..time.." " }
     })
   end
 
