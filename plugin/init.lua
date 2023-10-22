@@ -34,7 +34,7 @@ local config = {
     enabled = true,
     format = "%H:%M",
   },
-  hostname = {
+  hosts = {
     enabled = true,
   }
 }
@@ -121,8 +121,8 @@ M.apply_to_config = function(c, opts)
     format = config.clock.format,
   }
 
-  C.hostname = {
-    enabled = config.hostname.enabled
+  C.hosts = {
+    enabled = config.hosts.enabled
   }
 
   -- set the right-hand padding to 0 spaces, if the rounded style is active
@@ -381,8 +381,8 @@ wezterm.on("update-status", function(window, _pane)
   window:set_left_status(leader .. mode .. divider)
 
   local right_status = ""
-  if C.hostname.enabled  then
-    right_status = wezterm.hostname()
+  if C.hosts.enabled  then
+    right_status = wezterm.hosts()
   end
 
   if C.clock.enabled then
