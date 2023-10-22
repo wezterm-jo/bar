@@ -415,7 +415,7 @@ wezterm.on("update-status", function(window, pane)
       { Attribute = { Intensity = "Bold" } },
       { Background = { Color = "#eba0ac" } },
       { Foreground = { Color = palette.background } },
-      { Text = " "..wezterm.mux.get_active_workspace().." " }
+      { Text = "  "..wezterm.mux.get_active_workspace().." " }
     })
   end
 
