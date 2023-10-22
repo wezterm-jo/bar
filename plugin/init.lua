@@ -380,27 +380,41 @@ wezterm.on("update-status", function(window, _pane)
 
   window:set_left_status(leader .. mode .. divider)
 
-  local right_status = ""
+  local workspace_status = ""
+  local clock_status = ""
+  local text = ""
   if C.workspace.enabled  then
-    right_status = wezterm.mux.get_active_workspace()
+    workspace_status = wezterm.format({
+      { Background = { Color = "#cba6f7" } },
+      { Foreground = { Color = palette.background } },
+      { Text = wezterm.mux.get_active_workspace() }
+    })
   end
 
   if C.clock.enabled then
     local time = wezterm.time.now():format(C.clock.format)
-    if right_status ~= "" then
-        right_status = right_status .. " " .. time
-    else
-        right_status = time
-    end
+    clock_status = wezterm.format({
+      { Background = { Color = "#fab387" } },
+      { Foreground = { Color = palette.background } },
+      { Text = time }
+    })
   end
 
-  if right_status ~= "" then
-    window:set_right_status(wezterm.format({
-      { Background = { Color = palette.tab_bar.background } },
-      { Foreground = { Color = palette.ansi[6] } },
-      { Text = right_status },
-    }))
+  if workspace_status ~= "" then
+    text = workspace_status
   end
+
+  if clock_status ~= "" then
+    text = text..clock_status
+  end
+
+  -- if right_status ~= "" then
+  --   window:set_right_status(wezterm.format({
+  --     { Background = { Color = palette.tab_bar.background } },
+  --     { Foreground = { Color = palette.ansi[6] } },
+  --     { Text = right_status },
+  --   }))
+  -- end
 
 end)
 
