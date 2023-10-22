@@ -30,9 +30,12 @@ local config = {
       inactive = { "", ":" },
     },
   },
-  clock = {
-    enabled = true,
-    format = "%H:%M",
+  -- clock = {
+  --   enabled = true,
+  --   format = "%H:%M",
+  -- },
+  dir = {
+    enabled = true
   },
   workspace = {
     enabled = true
@@ -116,9 +119,13 @@ M.apply_to_config = function(c, opts)
     },
   }
 
-  C.clock = {
-    enabled = config.clock.enabled,
-    format = config.clock.format,
+  -- C.clock = {
+  --   enabled = config.clock.enabled,
+  --   format = config.clock.format,
+  -- }
+
+  C.dir = {
+    enabled = config.dir.enabled,
   }
 
   C.workspace = {
@@ -199,6 +206,26 @@ local nerd_icons = {
 
 local function startsWith(str, prefix)
     return string.sub(str, 1, #prefix) == prefix
+end
+
+local function active_tab(window)
+  for _, item in ipairs(window:tabs_with_info()) do
+    if item.is_active then
+      return item.tab
+    end
+  end
+end
+
+local function active_pane(tab)
+  for _, item in ipairs(tab:panes_with_info()) do
+    if item.is_active then
+      return item.pane
+    end
+  end
+end
+
+function basename(s)
+  return string.gsub(s, '(.*[/\\])(.*)', '%2')
 end
 
 -- workspace tab bar
@@ -381,7 +408,7 @@ wezterm.on("update-status", function(window, _pane)
   window:set_left_status(leader .. mode .. divider)
 
   local workspace_status = ""
-  local clock_status = ""
+  local dir_status = ""
   local text = ""
   if C.workspace.enabled  then
     workspace_status = wezterm.format({
@@ -392,22 +419,34 @@ wezterm.on("update-status", function(window, _pane)
     })
   end
 
-  if C.clock.enabled then
-    local time = wezterm.time.now():format(C.clock.format)
-    clock_status = wezterm.format({
+  if C.dir.enabled then
+    local activetab = active_tab(window)
+    local activepane = active_pane(activetab)
+    local title = basename(activepane.foreground_process_name)
+    dir_status = wezterm.format({
       { Attribute = { Intensity = "Bold" } },
       { Background = { Color = "#f5e0dc" } },
       { Foreground = { Color = palette.background } },
-      { Text = " "..time.." " }
-    })
+      { Text = " "..title.." " }
+    }) 
   end
+
+  -- if C.clock.enabled then
+  --   local time = wezterm.time.now():format(C.clock.format)
+  --   clock_status = wezterm.format({
+  --     { Attribute = { Intensity = "Bold" } },
+  --     { Background = { Color = "#f5e0dc" } },
+  --     { Foreground = { Color = palette.background } },
+  --     { Text = " "..time.." " }
+  --   })
+  -- end
 
   if workspace_status ~= "" then
     text = workspace_status
   end
 
-  if clock_status ~= "" then
-    text = text..clock_status
+  if dir_status ~= "" then
+    text = text..dir_status
   end
 
   if text ~= "" then
