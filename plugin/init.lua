@@ -352,7 +352,7 @@ wezterm.on(
   end
 )
 
-wezterm.on("update-status", function(window, _pane)
+wezterm.on("update-status", function(window, pane)
   local active_kt = window:active_key_table() ~= nil
   local show = C.leader.enabled or (active_kt and C.mode.enabled)
   if not show then
@@ -420,9 +420,7 @@ wezterm.on("update-status", function(window, _pane)
   end
 
   if C.dir.enabled then
-    local activetab = active_tab(window)
-    local activepane = active_pane(activetab)
-    local title = basename(activepane.foreground_process_name)
+    local title = basename(pane.foreground_process_name)
     dir_status = wezterm.format({
       { Attribute = { Intensity = "Bold" } },
       { Background = { Color = "#f5e0dc" } },
