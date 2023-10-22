@@ -394,7 +394,7 @@ wezterm.on("update-status", function(window, pane)
   local workspace_status = ""
   local dir_status = ""
   local text = ""
-  local divider1 = wezterm.format({
+  local divider2 = wezterm.format({
     { Background = { Color = "#11111b" } },
     { Foreground = { Color = "#eba0ac" } },
     { Text = C.div.l },
@@ -407,6 +407,12 @@ wezterm.on("update-status", function(window, pane)
       { Text = " "..wezterm.mux.get_active_workspace().." " }
     })
   end
+
+  local divider1 = wezterm.format({
+    { Background = { Color = "#11111b" } },
+    { Foreground = { Color = "#eba0ac" } },
+    { Text = C.div.l },
+  })
 
   if C.dir.enabled then
     local cwd_uri = pane:get_current_working_dir()
@@ -424,7 +430,7 @@ wezterm.on("update-status", function(window, pane)
   end
 
   if dir_status ~= "" then
-    text = text..dir_status
+    text = text..divider2..dir_status
   end
 
   if text ~= "" then
