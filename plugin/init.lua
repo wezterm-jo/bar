@@ -419,24 +419,24 @@ wezterm.on("update-status", function(window, pane)
     })
   end
 
-  if C.dir.enabled then
-    local activetab = active_tab(window)
-    local activepane = active_pane(activetab)
-    dir_status = wezterm.format({
-      { Attribute = { Intensity = "Bold" } },
-      { Background = { Color = "#f5e0dc" } },
-      { Foreground = { Color = palette.background } },
-      { Text = " "..pane:get_current_working_dir()" " }
-    }) 
-  end
+  -- if C.dir.enabled then
+  --   local activetab = active_tab(window)
+  --   local activepane = active_pane(activetab)
+  --   dir_status = wezterm.format({
+  --     { Attribute = { Intensity = "Bold" } },
+  --     { Background = { Color = "#f5e0dc" } },
+  --     { Foreground = { Color = palette.background } },
+  --     { Text = " "..pane:get_current_working_dir()" " }
+  --   }) 
+  -- end
 
   if workspace_status ~= "" then
     text = workspace_status
   end
 
-  if dir_status ~= "" then
-    text = text..dir_status
-  end
+  -- if dir_status ~= "" then
+  --   text = text..dir_status
+  -- end
 
   if text ~= "" then
     window:set_right_status(text)
