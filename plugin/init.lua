@@ -408,6 +408,10 @@ wezterm.on("update-status", function(window, _pane)
     text = text..clock_status
   end
 
+  if text ~= "" then
+    window:set_right_status(text)
+  end
+
   -- if right_status ~= "" then
   --   window:set_right_status(wezterm.format({
   --     { Background = { Color = palette.tab_bar.background } },
