@@ -208,23 +208,7 @@ local function startsWith(str, prefix)
     return string.sub(str, 1, #prefix) == prefix
 end
 
-local function active_tab(window)
-  for _, item in ipairs(window:tabs_with_info()) do
-    if item.is_active then
-      return item.tab
-    end
-  end
-end
-
-local function active_pane(tab)
-  for _, item in ipairs(tab:panes_with_info()) do
-    if item.is_active then
-      return item.pane
-    end
-  end
-end
-
-function basename(s)
+local function basename(s)
   return string.gsub(s, '(.*[/\\])(.*)', '%2')
 end
 
@@ -410,6 +394,11 @@ wezterm.on("update-status", function(window, pane)
   local workspace_status = ""
   local dir_status = ""
   local text = ""
+  local divider1 = wezterm.format({
+    { Background = { Color = divider_bg } },
+    { Foreground = { Color = palette.ansi[5] } },
+    { Text = C.div.l },
+  })
   if C.workspace.enabled  then
     workspace_status = wezterm.format({
       { Attribute = { Intensity = "Bold" } },
@@ -431,7 +420,7 @@ wezterm.on("update-status", function(window, pane)
   end
 
   if workspace_status ~= "" then
-    text = workspace_status
+    text = divider1..workspace_status
   end
 
   if dir_status ~= "" then
