@@ -420,8 +420,8 @@ wezterm.on("update-status", function(window, pane)
   end
 
   if C.dir.enabled then
-    local first_tab_active = window:mux_window():tabs_with_info()[1].is_active
-    local pane = first_tab_active.pane
+    local activetab = active_tab(window)
+    local activepane = active_pane(activetab)
     local title = basename(pane.foreground_process_name)
     dir_status = wezterm.format({
       { Attribute = { Intensity = "Bold" } },
@@ -435,9 +435,9 @@ wezterm.on("update-status", function(window, pane)
     text = workspace_status
   end
 
-  -- if dir_status ~= "" then
-  --   text = text..dir_status
-  -- end
+  if dir_status ~= "" then
+    text = text..dir_status
+  end
 
   if text ~= "" then
     window:set_right_status(text)
