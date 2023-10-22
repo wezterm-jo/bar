@@ -420,11 +420,13 @@ wezterm.on("update-status", function(window, pane)
   end
 
   if C.dir.enabled then
+    local cwd_uri = pane:get_current_working_dir()
+    local hostname = cwd_uri.host
     dir_status = wezterm.format({
       { Attribute = { Intensity = "Bold" } },
       { Background = { Color = "#f5e0dc" } },
       { Foreground = { Color = palette.background } },
-      { Text = " "..pane.foreground_process_name.." " }
+      { Text = " "..hostname.." " }
     }) 
   end
 
