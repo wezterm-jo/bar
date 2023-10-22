@@ -404,7 +404,7 @@ wezterm.on("update-status", function(window, pane)
       { Attribute = { Intensity = "Bold" } },
       { Background = { Color = "#eba0ac" } },
       { Foreground = { Color = palette.background } },
-      { Text = " "..wezterm.mux.get_active_workspace().." " }
+      { Text = " "..wezterm.mux.get_active_workspace()..C.p }
     })
   end
 
@@ -421,7 +421,7 @@ wezterm.on("update-status", function(window, pane)
       { Attribute = { Intensity = "Bold" } },
       { Background = { Color = "#f5e0dc" } },
       { Foreground = { Color = palette.background } },
-      { Text = "  "..dir.." " }
+      { Text = " "..dir..C.p }
     }) 
   end
 
