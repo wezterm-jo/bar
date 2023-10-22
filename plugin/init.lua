@@ -385,7 +385,8 @@ wezterm.on("update-status", function(window, _pane)
   local text = ""
   if C.workspace.enabled  then
     workspace_status = wezterm.format({
-      { Background = { Color = "#cba6f7" } },
+      { Attribute = { Intensity = "Bold" } },
+      { Background = { Color = "#eba0ac" } },
       { Foreground = { Color = palette.background } },
       { Text = " "..wezterm.mux.get_active_workspace().." " }
     })
@@ -394,7 +395,8 @@ wezterm.on("update-status", function(window, _pane)
   if C.clock.enabled then
     local time = wezterm.time.now():format(C.clock.format)
     clock_status = wezterm.format({
-      { Background = { Color = "#fab387" } },
+      { Attribute = { Intensity = "Bold" } },
+      { Background = { Color = "#f5e0dc" } },
       { Foreground = { Color = palette.background } },
       { Text = " "..time.." " }
     })
