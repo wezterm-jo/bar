@@ -421,7 +421,7 @@ wezterm.on("update-status", function(window, pane)
 
   if C.dir.enabled then
     local cwd_uri = pane:get_current_working_dir()
-    local dir = cwd_uri.file_path
+    local dir = basename(cwd_uri.file_path) 
     dir_status = wezterm.format({
       { Attribute = { Intensity = "Bold" } },
       { Background = { Color = "#f5e0dc" } },
