@@ -395,7 +395,7 @@ wezterm.on("update-status", function(window, pane)
   local dir_status = ""
   local text = ""
   local divider1 = wezterm.format({
-    { Background = { Color = divider_bg } },
+    { Background = { Color = "#eba0ac" } },
     { Foreground = { Color = palette.ansi[5] } },
     { Text = C.div.l },
   })
