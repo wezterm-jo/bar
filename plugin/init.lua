@@ -34,8 +34,9 @@ local config = {
     enabled = true,
     format = "%H:%M",
   },
-  host = {
+  custom = {
     enabled = true,
+    text = "Custom"
   }
 }
 
@@ -121,8 +122,9 @@ M.apply_to_config = function(c, opts)
     format = config.clock.format,
   }
 
-  C.host = {
-    enabled = config.host.enabled
+  C.custom = {
+    enabled = config.custom.enabled,
+    text = config.custom.text
   }
 
   -- set the right-hand padding to 0 spaces, if the rounded style is active
@@ -308,7 +310,7 @@ wezterm.on(
         tabtitle = nerd_icons['vim']
     elseif startsWith(tabtitle, "~") then
         tabtitle = nerd_icons['terminal']
-    elseif startsWith(tabtitle, "wslhost.exe") then
+    elseif startsWith(tabtitle, "wslcustom.exe") then
         tabtitle = nerd_icons['terminal']
     end
 
@@ -381,14 +383,8 @@ wezterm.on("update-status", function(window, _pane)
   window:set_left_status(leader .. mode .. divider)
 
   local right_status = ""
-  if C.host.enabled  then
-    local handle = io.popen("whoami")
-    local result = handle:read("*a")
-    handle:close()
-
-    -- Remove leading and trailing whitespace (e.g., newline characters)
-    local username = result:match("^%s*(.-)%s*$")
-    right_status = username
+  if C.custom.enabled  then
+    right_status = C.custom.text
   end
 
   if C.clock.enabled then
