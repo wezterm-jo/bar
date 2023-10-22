@@ -409,8 +409,8 @@ wezterm.on("update-status", function(window, pane)
   end
 
   local divider1 = wezterm.format({
-    { Background = { Color = "#11111b" } },
-    { Foreground = { Color = "#eba0ac" } },
+    { Background = { Color = "#eba0ac" } },
+    { Foreground = { Color = "#f5e0dc" } },
     { Text = C.div.l },
   })
 
