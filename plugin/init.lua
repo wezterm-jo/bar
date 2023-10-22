@@ -419,25 +419,15 @@ wezterm.on("update-status", function(window, pane)
     })
   end
 
-  -- if C.dir.enabled then
-  --   local title = basename(pane.foreground_process_name)
-  --   dir_status = wezterm.format({
-  --     { Attribute = { Intensity = "Bold" } },
-  --     { Background = { Color = "#f5e0dc" } },
-  --     { Foreground = { Color = palette.background } },
-  --     { Text = " "..title.." " }
-  --   }) 
-  -- end
-
-  -- if C.clock.enabled then
-  --   local time = wezterm.time.now():format(C.clock.format)
-  --   clock_status = wezterm.format({
-  --     { Attribute = { Intensity = "Bold" } },
-  --     { Background = { Color = "#f5e0dc" } },
-  --     { Foreground = { Color = palette.background } },
-  --     { Text = " "..time.." " }
-  --   })
-  -- end
+  if C.dir.enabled then
+    local title = basename(pane.foreground_process_name)
+    dir_status = wezterm.format({
+      { Attribute = { Intensity = "Bold" } },
+      { Background = { Color = "#f5e0dc" } },
+      { Foreground = { Color = palette.background } },
+      { Text = " "..title.." " }
+    }) 
+  end
 
   if workspace_status ~= "" then
     text = workspace_status
