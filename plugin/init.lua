@@ -422,12 +422,11 @@ wezterm.on("update-status", function(window, pane)
   if C.dir.enabled then
     local activetab = active_tab(window)
     local activepane = active_pane(activetab)
-    local title = basename(pane.foreground_process_name)
     dir_status = wezterm.format({
       { Attribute = { Intensity = "Bold" } },
       { Background = { Color = "#f5e0dc" } },
       { Foreground = { Color = palette.background } },
-      { Text = " "..title.." " }
+      { Text = " "..activepane:get_foreground_process_name().." " }
     }) 
   end
 
