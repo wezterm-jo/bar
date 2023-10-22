@@ -34,7 +34,7 @@ local config = {
     enabled = true,
     format = "%H:%M",
   },
-  hosts = {
+  host = {
     enabled = true,
   }
 }
@@ -121,8 +121,8 @@ M.apply_to_config = function(c, opts)
     format = config.clock.format,
   }
 
-  C.hosts = {
-    enabled = config.hosts.enabled
+  C.host = {
+    enabled = config.host.enabled
   }
 
   -- set the right-hand padding to 0 spaces, if the rounded style is active
@@ -381,8 +381,14 @@ wezterm.on("update-status", function(window, _pane)
   window:set_left_status(leader .. mode .. divider)
 
   local right_status = ""
-  if C.hosts.enabled  then
-    right_status = wezterm.hosts()
+  if C.host.enabled  then
+    local handle = io.popen("whoami")
+    local result = handle:read("*a")
+    handle:close()
+
+    -- Remove leading and trailing whitespace (e.g., newline characters)
+    local username = result:match("^%s*(.-)%s*$")
+    right_status = username
   end
 
   if C.clock.enabled then
