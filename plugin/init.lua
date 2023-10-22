@@ -395,8 +395,8 @@ wezterm.on("update-status", function(window, pane)
   local dir_status = ""
   local text = ""
   local divider1 = wezterm.format({
-    { Background = { Color = "#eba0ac" } },
-    { Foreground = { Color = "#CDD6F4" } },
+    { Background = { Color = divider_bg } },
+    { Foreground = { Color = "#eba0ac" } },
     { Text = C.div.l },
   })
   if C.workspace.enabled  then
